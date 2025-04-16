@@ -69,10 +69,15 @@ Example: Internal IDs are hidden while relevant ARNs are exposed
 ## Best Practices Implemented
 
 **Consistent Naming**: All resources follow the same naming pattern using the project_name variable
+
 **Data Sources**: Used to reference existing resources across modules (IAM roles)
+
 **Clear Dependencies**: Explicit module dependencies for proper provisioning order
+
 **Configurable Defaults**: Sensible defaults that can be overridden
+
 **README Documentation**: Clear guidance on module usage and structure
+
 
 This modular approach makes the infrastructure code more maintainable, testable, and reusable—a significant improvement over a monolithic configuration file.
 
