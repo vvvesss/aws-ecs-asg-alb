@@ -53,7 +53,7 @@ graph TD
     
     Internet -- HTTP --> IG
     IG --> ALB
-    PrivateSubnets --> NAT
+    Private_Subnets --> NAT
     NAT --> Internet
     
     IAM_Roles -- "Permissions" --> ECS_Service
@@ -66,7 +66,7 @@ graph TD
     style CW_Alarm fill:#ffb,stroke:#333,stroke-width:1px
     
     classDef subnet fill:#eff,stroke:#099,stroke-width:1px,stroke-dasharray: 5 5
-    class "PublicSubnets","Private Subnets" subnet
+    class "Public_Subnets","Private_Subnets" subnet
 ```
 
 ## Resource Communication Flow
