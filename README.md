@@ -142,19 +142,15 @@ graph TD
     Root --> ALB
     Root --> ECS
     
-    Security -.->|vpc_id| Network
-    ALB -.->|vpc_id<br/>public_subnet_ids| Network
-    ALB -.->|alb_security_group_id| Security
-    
-    ECS -.->|vpc_id<br/>private_subnet_ids| Network
-    ECS -.->|ecs_tasks_security_group_id<br/>task_execution_role_arn<br/>task_role_arn| Security
-    ECS -.->|target_group_arn| ALB
-    
+    Security -.-> Network
+    ALB -.-> Network
+    ALB -.-> Security
+    ECS -.-> Network
+    ECS -.-> Security
+    ECS -.-> ALB
+
     classDef module fill:#f9f,stroke:#333,stroke-width:2px
     class Root,Network,Security,ALB,ECS module
-    
-    classDef dependency stroke-dasharray: 5 5,stroke:#333,stroke-width:1px
-    class "Security -.->|vpc_id| Network","ALB -.->|vpc_id<br/>public_subnet_ids| Network","ALB -.->|alb_security_group_id| Security","ECS -.->|vpc_id<br/>private_subnet_ids| Network","ECS -.->|ecs_tasks_security_group_id<br/>task_execution_role_arn<br/>task_role_arn| Security","ECS -.->|target_group_arn| ALB" dependency
 ```
 
 ## Module Structure
