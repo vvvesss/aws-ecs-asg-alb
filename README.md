@@ -1,4 +1,4 @@
-# Modular AWS ECS Service with ALB and ASG
+# Modular AWS ECS Service with ALB
 
 This Terraform project creates an ECS service exposed via an Application Load Balancer (ALB) with auto-scaling capabilities. The configuration is organized in a modular way to improve maintainability, reusability, and separation of concerns.
 
@@ -46,14 +46,14 @@ graph TD
     end
     
     Internet -- HTTP:80 --> ALB
-    ALB -- HTTP:3000 --> ECS_Service
+    ALB -- HTTP:8080 --> ECS_Service
     ECS_Service --> ECS_Task1 & ECS_Task2 & ECS_Task3
     ECS_Task1 & ECS_Task2 & ECS_Task3 -- Logs --> CW
     CW_Alarm -- "Trigger Scale In/Out" --> ECS_Service
     
     Internet -- HTTP --> IG
-    IG --> Public Subnets
-    Private Subnets -- Traffic --> NAT
+    IG --> ALB
+    Private Subnets --> NAT
     NAT --> Internet
     
     IAM_Roles -- "Permissions" --> ECS_Service
@@ -83,7 +83,7 @@ sequenceDiagram
     User->>ALB: HTTP Request on Port 80
     ALB->>SG: Check Security Rules
     SG-->>ALB: Allow Traffic
-    ALB->>ECS: Forward to Container Port 3000
+    ALB->>ECS: Forward to Container Port 8080
     ECS->>CW: Send Logs & Metrics
     
     CW->>ASG: CPU Metrics > 60% (2 periods)
@@ -111,7 +111,7 @@ flowchart LR
         end
         
         subgraph "ECS Tasks Security Group"
-            ECS_IN[Inbound: Allow 3000 from ALB SG only]
+            ECS_IN[Inbound: Allow 8080 from ALB SG only]
             ECS_OUT[Outbound: Allow All]
         end
         
@@ -119,7 +119,7 @@ flowchart LR
         Internet -->|HTTP/80| ALB_IN
         ALB_OUT -->|All Traffic| Internet
         
-        ALB_OUT -->|Container Port/3000| ECS_IN
+        ALB_OUT -->|Container Port/8080| ECS_IN
         ECS_OUT -->|All Traffic| Internet
     end
     
@@ -255,10 +255,6 @@ The ECS service is configured with auto scaling capabilities to handle varying l
 - Terraform >= 1.0.0
 - AWS provider ~> 5.0
 - AWS CLI configured with appropriate credentials
-
-## Related Projects
-
-Check out the [AWS Terraform S3 Remote Backend Setup](https://github.com/vvvesss/aws-terraform-setup) for backend configuration examples.
 
 ## Notes
 
