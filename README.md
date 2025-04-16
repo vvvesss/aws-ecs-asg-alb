@@ -18,48 +18,53 @@ The project creates the following infrastructure:
 
 ```mermaid
 graph TD
-    subgraph AWS_Cloud["AWS Cloud"]
-        subgraph VPC["VPC"] 
-            subgraph Public_Subnets["Public Subnets"]
-                ALB[Application Load Balancer]
-                IG[Internet Gateway]
-                NAT[NAT Gateway]
-            end
-            
-            subgraph Private_Subnets["Private Subnets"]
-                subgraph ECS["ECS Cluster"]
-                    ECS_Service[ECS Service]
-                    subgraph AS["Auto Scaling"]
-                        ECS_Task1[ECS Task]
-                        ECS_Task2[ECS Task]
-                        ECS_Task3[ECS Task]
-                    end
-                end
-            end
-        end
-        
-        Internet((Internet))
-        CW[CloudWatch Logs]
-        CW_Alarm[CloudWatch Alarms]
-        IAM_Roles[IAM Roles]
-    end
-    
-    Internet -- HTTP:80 --> ALB
-    ALB -- HTTP:8080 --> ECS_Service
-    ECS_Service --> ECS_Task1 & ECS_Task2 & ECS_Task3
-    ECS_Task1 & ECS_Task2 & ECS_Task3 -- Logs --> CW
-    CW_Alarm -- "Trigger Scale In/Out" --> ECS_Service
-    Internet -- HTTP --> IG
-    IG --> ALB
-    NAT --> Internet
-    IAM_Roles -- "Permissions" --> ECS_Service
+    Internet((Internet))
+    IG[Internet Gateway]
+    ALB[Application Load Balancer]
+    NAT[NAT Gateway]
+    ECS_Service[ECS Service]
+    ECS_Task1[ECS Task 1]
+    ECS_Task2[ECS Task 2]
+    ECS_Task3[ECS Task 3]
+    CW[CloudWatch Logs]
+    CW_Alarm[CloudWatch Alarms]
+    IAM_Roles[IAM Roles]
 
-    style ALB fill:#f9f,stroke:#333,stroke-width:2px
-    style ECS_Service fill:#bbf,stroke:#333,stroke-width:2px
-    style ECS_Task1 fill:#bfb,stroke:#333,stroke-width:1px
-    style ECS_Task2 fill:#bfb,stroke:#333,stroke-width:1px,stroke-dasharray: 5 5
-    style ECS_Task3 fill:#bfb,stroke:#333,stroke-width:1px,stroke-dasharray: 5 5
-    style CW_Alarm fill:#ffb,stroke:#333,stroke-width:1px
+    Internet --> IG
+    IG --> ALB
+    ALB --> ECS_Service
+    ECS_Service --> ECS_Task1
+    ECS_Service --> ECS_Task2
+    ECS_Service --> ECS_Task3
+    ECS_Task1 --> CW
+    ECS_Task2 --> CW
+    ECS_Task3 --> CW
+    CW_Alarm --> ECS_Service
+    IAM_Roles --> ECS_Service
+    NAT --> Internet
+
+    %% Visual grouping (not actual subgraph titles)
+    subgraph Public_Subnets
+        ALB
+        IG
+        NAT
+    end
+
+    subgraph Private_Subnets
+        ECS_Service
+        ECS_Task1
+        ECS_Task2
+        ECS_Task3
+    end
+
+    subgraph Monitoring
+        CW
+        CW_Alarm
+    end
+
+    subgraph IAM
+        IAM_Roles
+    end
 ```
 
 ## Resource Communication Flow
