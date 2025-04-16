@@ -101,11 +101,6 @@ The ECS service is configured with auto scaling capabilities to handle varying l
   - **Maximum**: 3 tasks
   - **Desired**: 1 task (baseline)
 
-- **Deployment Configuration**:
-  - **Circuit Breaker**: Enabled with automatic rollback
-  - **Maximum Percent**: 200% (allows double capacity during deployments)
-  - **Minimum Healthy Percent**: 50% (ensures at least half of tasks remain available)
-
 ## Requirements
 
 - Terraform >= 1.0.0
