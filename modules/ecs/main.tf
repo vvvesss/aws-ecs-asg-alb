@@ -140,12 +140,12 @@ resource "aws_appautoscaling_policy" "ecs_policy_cpu" {
 resource "aws_cloudwatch_metric_alarm" "cpu_high" {
   alarm_name          = "${var.project_name}-cpu-utilization-high"
   comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = 1
+  evaluation_periods  = 2
   metric_name         = "CPUUtilization"
   namespace           = "AWS/ECS"
-  period              = 30
+  period              = 60
   statistic           = "Average"
-  threshold           = 20
+  threshold           = 60
   alarm_description   = "This metric monitors ECS CPU utilization high"
   alarm_actions       = [aws_appautoscaling_policy.ecs_policy_cpu.arn]
 
@@ -180,9 +180,9 @@ resource "aws_cloudwatch_metric_alarm" "cpu_low" {
   evaluation_periods  = 2
   metric_name         = "CPUUtilization"
   namespace           = "AWS/ECS"
-  period              = 120
+  period              = 60
   statistic           = "Average"
-  threshold           = 10
+  threshold           = 30
   alarm_description   = "This metric monitors ECS CPU utilization low"
   alarm_actions       = [aws_appautoscaling_policy.ecs_policy_cpu_down.arn]
 
