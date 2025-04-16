@@ -18,18 +18,18 @@ The project creates the following infrastructure:
 
 ```mermaid
 graph TD
-    subgraph "AWS Cloud"
-        subgraph "VPC" 
-            subgraph "Public Subnets"
+    subgraph AWS_Cloud["AWS Cloud"]
+        subgraph VPC["VPC"] 
+            subgraph Public_Subnets["Public Subnets"]
                 ALB[Application Load Balancer]
                 IG[Internet Gateway]
                 NAT[NAT Gateway]
             end
             
-            subgraph "Private Subnets"
-                subgraph "ECS Cluster"
+            subgraph Private_Subnets["Private Subnets"]
+                subgraph ECS["ECS Cluster"]
                     ECS_Service[ECS Service]
-                    subgraph "Auto Scaling"
+                    subgraph AS["Auto Scaling"]
                         ECS_Task1[ECS Task]
                         ECS_Task2[ECS Task]
                         ECS_Task3[ECS Task]
@@ -41,7 +41,6 @@ graph TD
         Internet((Internet))
         CW[CloudWatch Logs]
         CW_Alarm[CloudWatch Alarms]
-        
         IAM_Roles[IAM Roles]
     end
     
@@ -50,23 +49,17 @@ graph TD
     ECS_Service --> ECS_Task1 & ECS_Task2 & ECS_Task3
     ECS_Task1 & ECS_Task2 & ECS_Task3 -- Logs --> CW
     CW_Alarm -- "Trigger Scale In/Out" --> ECS_Service
-    
     Internet -- HTTP --> IG
     IG --> ALB
-    Private_Subnets --> NAT
     NAT --> Internet
-    
     IAM_Roles -- "Permissions" --> ECS_Service
-    
+
     style ALB fill:#f9f,stroke:#333,stroke-width:2px
     style ECS_Service fill:#bbf,stroke:#333,stroke-width:2px
     style ECS_Task1 fill:#bfb,stroke:#333,stroke-width:1px
     style ECS_Task2 fill:#bfb,stroke:#333,stroke-width:1px,stroke-dasharray: 5 5
     style ECS_Task3 fill:#bfb,stroke:#333,stroke-width:1px,stroke-dasharray: 5 5
     style CW_Alarm fill:#ffb,stroke:#333,stroke-width:1px
-    
-    classDef subnet fill:#eff,stroke:#099,stroke-width:1px,stroke-dasharray: 5 5
-    class "Public_Subnets","Private_Subnets" subnet
 ```
 
 ## Resource Communication Flow
