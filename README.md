@@ -121,10 +121,10 @@ flowchart LR
         ECS_OUT -->|All Traffic| Internet
     end
     
-    style ALB_IN fill:#f9f,stroke:#333,stroke-width:1px
-    style ECS_IN fill:#bbf,stroke:#333,stroke-width:1px
-    style ALB_OUT fill:#ddd,stroke:#333,stroke-width:1px
-    style ECS_OUT fill:#ddd,stroke:#333,stroke-width:1px
+    style ALB_IN fill:#9f9,stroke:#333,stroke-width:1px
+    style ECS_IN fill:#0e6,stroke:#333,stroke-width:1px
+    style ALB_OUT fill:#052,stroke:#333,stroke-width:1px
+    style ECS_OUT fill:#052,stroke:#333,stroke-width:1px
 ```
 
 ## Module Dependency Diagram
@@ -149,7 +149,7 @@ graph TD
     ECS -.-> Security
     ECS -.-> ALB
 
-    classDef module fill:#f9f,stroke:#333,stroke-width:2px
+    classDef module fill:#f9f,stroke:#333,stroke-width:2px,color:#000
     class Root,Network,Security,ALB,ECS module
 ```
 
