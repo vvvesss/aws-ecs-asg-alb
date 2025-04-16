@@ -13,7 +13,7 @@ resource "aws_ecs_cluster" "main" {
 
 resource "aws_cloudwatch_log_group" "ecs" {
   name              = "/ecs/${var.project_name}"
-  retention_in_days = 30
+  retention_in_days = 1
 
   tags = {
     Name = "/ecs/${var.project_name}"
@@ -22,8 +22,8 @@ resource "aws_cloudwatch_log_group" "ecs" {
 
 resource "aws_ecs_task_definition" "main" {
   family                   = "${var.project_name}-task"
-  network_mode             = "awsvpc"
-  requires_compatibilities = ["FARGATE"]
+  network_mode             = "awsvpc" 
+  requires_compatibilities = ["FARGATE"] 
   cpu                      = var.container_cpu
   memory                   = var.container_memory
   execution_role_arn       = var.task_execution_role_arn

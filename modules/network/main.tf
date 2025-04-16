@@ -43,6 +43,7 @@ resource "aws_internet_gateway" "igw" {
   }
 }
 
+#setup public route table
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
 
@@ -57,12 +58,14 @@ resource "aws_route_table" "public" {
   }
 }
 
+#looping through all your public subnets and attaching to the public route table
 resource "aws_route_table_association" "public" {
   count          = length(aws_subnet.public)
   subnet_id      = aws_subnet.public[count.index].id
   route_table_id = aws_route_table.public.id
 }
 
+#create elastic IP
 resource "aws_eip" "nat" {
   domain = "vpc"
 
@@ -71,7 +74,7 @@ resource "aws_eip" "nat" {
     Managed = "Terraform"
   }
 }
-
+#the rest is the same like igw but for the natgw
 resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.nat.id
   subnet_id     = aws_subnet.public[0].id

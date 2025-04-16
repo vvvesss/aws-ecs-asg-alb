@@ -49,6 +49,7 @@ resource "aws_security_group" "ecs_tasks" {
 }
 
 # IAM Roles and Policies
+# Execution role is for ECS to run containers
 resource "aws_iam_role" "ecs_task_execution_role" {
   name = "${var.project_name}-task-execution-role"
 
@@ -71,6 +72,7 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution_role_policy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
+# Task role is for code inside the container to access AWS
 resource "aws_iam_role" "ecs_task_role" {
   name = "${var.project_name}-task-role"
 
@@ -87,3 +89,23 @@ resource "aws_iam_role" "ecs_task_role" {
     ]
   })
 }
+#Example Use Case for S3 access inside the container
+# resource "aws_iam_policy" "s3_access" {
+#   name = "${var.project_name}-s3-access"
+#   policy = jsonencode({
+#     Version = "2012-10-17",
+#     Statement = [{
+#       Effect = "Allow",
+#       Action = [
+#         "s3:GetObject",
+#         "s3:PutObject"
+#       ],
+#       Resource = "arn:aws:s3:::your-bucket-name/*"
+#     }]
+#   })
+# }
+
+# resource "aws_iam_role_policy_attachment" "task_s3" {
+#   role       = aws_iam_role.ecs_task_role.name
+#   policy_arn = aws_iam_policy.s3_access.arn
+# }
