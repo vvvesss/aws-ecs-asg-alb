@@ -76,9 +76,7 @@ Example: Internal IDs are hidden while relevant ARNs are exposed
 
 **Configurable Defaults**: Sensible defaults that can be overridden
 
-**README Documentation**: Clear guidance on module usage and structure
 
 
-This modular approach makes the infrastructure code more maintainable, testable, and reusable—a significant improvement over a monolithic configuration file.
 
 
