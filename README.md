@@ -53,7 +53,7 @@ graph TD
     
     Internet -- HTTP --> IG
     IG --> ALB
-    Private Subnets --> NAT
+    PrivateSubnets --> NAT
     NAT --> Internet
     
     IAM_Roles -- "Permissions" --> ECS_Service
