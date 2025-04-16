@@ -58,7 +58,7 @@ resource "aws_route_table" "public" {
   }
 }
 
-#looping through all your public subnets and attaching to the public route table
+#looping through all public subnets and attaching to the public route table
 resource "aws_route_table_association" "public" {
   count          = length(aws_subnet.public)
   subnet_id      = aws_subnet.public[count.index].id
