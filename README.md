@@ -66,7 +66,7 @@ graph TD
     style CW_Alarm fill:#ffb,stroke:#333,stroke-width:1px
     
     classDef subnet fill:#eff,stroke:#099,stroke-width:1px,stroke-dasharray: 5 5
-    class "Public Subnets","Private Subnets" subnet
+    class "PublicSubnets","Private Subnets" subnet
 ```
 
 ## Resource Communication Flow
