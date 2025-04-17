@@ -5,6 +5,8 @@ I've created a Terraform configuration for deploying an ECS service with the spe
 
 
 
+
+
 ### Networking
 
 **VPC Architecture**: Created a VPC with public and private subnets across two availability zones for high availability
@@ -16,6 +18,8 @@ I've created a Terraform configuration for deploying an ECS service with the spe
 **NAT Gateway**: Allows containers in private subnets to access the internet for updates and dependencies
 
 **Internet Gateway**: Enables inbound/outbound internet access for the public subnets
+
+
 
 
 
@@ -31,11 +35,15 @@ IAM Principle of Least Privilege: Applied through specific roles for ECS tasks
 
 
 
+
+
 ### IAM 
 
 Task Execution Role: Allows ECS to pull container images and push logs
 
 Task Role: Defines permissions for the running container (currently minimal with commented example for S3 access)
+
+
 
 
 
@@ -58,7 +66,11 @@ Container access is restricted to only ALB traffic through security group rules
 
 
 
+
+
 ## Reusability, Scalability, and Maintainability
+
+
 
 
 
@@ -72,6 +84,8 @@ Container access is restricted to only ALB traffic through security group rules
 
 
 
+
+
 ### Scalability
 
 **Auto Scaling**: Implemented step scaling policy based on CPU utilization (scale up at 60%, down at 30%)
@@ -79,6 +93,8 @@ Container access is restricted to only ALB traffic through security group rules
 **Multi-AZ**: Resources deployed across multiple availability zones
 
 **Fargate**: Serverless container execution eliminates host management concerns
+
+
 
 
 
@@ -91,6 +107,8 @@ Container access is restricted to only ALB traffic through security group rules
 **Health Checks**: Both ALB and container health checks for robust monitoring
 
 **Outputs**: Provided essential outputs for easy reference
+
+
 
 
 
@@ -119,6 +137,8 @@ Container access is restricted to only ALB traffic through security group rules
 - Step scaling allows for more aggressive scaling at higher utilization
 
 - Scaling down is more conservative (longer cooldown) to prevent thrashing
+
+
 
 
 
