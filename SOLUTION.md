@@ -3,6 +3,8 @@ I've created a Terraform configuration for deploying an ECS service with the spe
 
 ## Networking, Security, IAM, and Resource Dependencies
 
+
+
 ### Networking
 
 **VPC Architecture**: Created a VPC with public and private subnets across two availability zones for high availability
@@ -15,6 +17,8 @@ I've created a Terraform configuration for deploying an ECS service with the spe
 
 **Internet Gateway**: Enables inbound/outbound internet access for the public subnets
 
+
+
 ### Security
 
 **Security Groups**:
@@ -25,11 +29,15 @@ ECS tasks security group only allows traffic from the ALB on the container port
 
 IAM Principle of Least Privilege: Applied through specific roles for ECS tasks
 
+
+
 ### IAM 
 
 Task Execution Role: Allows ECS to pull container images and push logs
 
 Task Role: Defines permissions for the running container (currently minimal with commented example for S3 access)
+
+
 
 ### Resource Dependencies 
 
@@ -47,7 +55,12 @@ Security is maintained by placing containers in private subnets
 
 Container access is restricted to only ALB traffic through security group rules
 
+
+
+
 ## Reusability, Scalability, and Maintainability
+
+
 
 ### Reusability
 
@@ -57,6 +70,8 @@ Container access is restricted to only ALB traffic through security group rules
 
 **Modular Approach**: Logically organized resources by function
 
+
+
 ### Scalability
 
 **Auto Scaling**: Implemented step scaling policy based on CPU utilization (scale up at 60%, down at 30%)
@@ -64,6 +79,8 @@ Container access is restricted to only ALB traffic through security group rules
 **Multi-AZ**: Resources deployed across multiple availability zones
 
 **Fargate**: Serverless container execution eliminates host management concerns
+
+
 
 ### Maintainability
 
@@ -74,6 +91,8 @@ Container access is restricted to only ALB traffic through security group rules
 **Health Checks**: Both ALB and container health checks for robust monitoring
 
 **Outputs**: Provided essential outputs for easy reference
+
+
 
 ### Tradeoffs and Considerations
 
@@ -100,6 +119,7 @@ Container access is restricted to only ALB traffic through security group rules
 - Step scaling allows for more aggressive scaling at higher utilization
 
 - Scaling down is more conservative (longer cooldown) to prevent thrashing
+
 
 
 ### Improvements for Production
