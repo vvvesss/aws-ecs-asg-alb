@@ -3,9 +3,7 @@ I've created a Terraform configuration for deploying an ECS service with the spe
 
 ## Networking, Security, IAM, and Resource Dependencies
 
-
-
-
+<br><br><br>
 
 ### Networking
 
@@ -19,9 +17,7 @@ I've created a Terraform configuration for deploying an ECS service with the spe
 
 **Internet Gateway**: Enables inbound/outbound internet access for the public subnets
 
-
-
-
+<br><br><br>
 
 ### Security
 
@@ -33,9 +29,7 @@ ECS tasks security group only allows traffic from the ALB on the container port
 
 IAM Principle of Least Privilege: Applied through specific roles for ECS tasks
 
-
-
-
+<br><br><br>
 
 ### IAM 
 
@@ -43,9 +37,7 @@ Task Execution Role: Allows ECS to pull container images and push logs
 
 Task Role: Defines permissions for the running container (currently minimal with commented example for S3 access)
 
-
-
-
+<br><br><br>
 
 ### Resource Dependencies 
 
@@ -63,16 +55,11 @@ Security is maintained by placing containers in private subnets
 
 Container access is restricted to only ALB traffic through security group rules
 
-
-
-
-
+<br><br><br><br><br><br>
 
 ## Reusability, Scalability, and Maintainability
 
-
-
-
+<br><br><br>
 
 ### Reusability
 
@@ -82,9 +69,7 @@ Container access is restricted to only ALB traffic through security group rules
 
 **Modular Approach**: Logically organized resources by function
 
-
-
-
+<br><br><br>
 
 ### Scalability
 
@@ -94,9 +79,7 @@ Container access is restricted to only ALB traffic through security group rules
 
 **Fargate**: Serverless container execution eliminates host management concerns
 
-
-
-
+<br><br><br>
 
 ### Maintainability
 
@@ -108,9 +91,7 @@ Container access is restricted to only ALB traffic through security group rules
 
 **Outputs**: Provided essential outputs for easy reference
 
-
-
-
+<br><br><br>
 
 ### Tradeoffs and Considerations
 
@@ -138,9 +119,7 @@ Container access is restricted to only ALB traffic through security group rules
 
 - Scaling down is more conservative (longer cooldown) to prevent thrashing
 
-
-
-
+<br><br><br>
 
 ### Improvements for Production
 
