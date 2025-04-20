@@ -1,6 +1,6 @@
 # Modular AWS ECS Service with ALB and auto scaling features
 
-This Terraform project creates an ECS service exposed via an Application Load Balancer (ALB) with auto-scaling capabilities. The configuration is organized in a modular way to improve maintainability, reusability, and separation of concerns.
+This Terraform project builds an ECS service that is accessible through an auto-scaling Application Load Balancer (ALB). Modular organization of the configuration enhances maintainability, reusability, and concern separation.
 
 ## Architecture
 
