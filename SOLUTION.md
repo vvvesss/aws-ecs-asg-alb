@@ -1,5 +1,5 @@
 # Solution Insights
-I've created a Terraform configuration for deploying an ECS service with the specified requirements. 
+
 
 ## Networking, Security, IAM, and Resource Dependencies
 
@@ -7,11 +7,11 @@ I've created a Terraform configuration for deploying an ECS service with the spe
 
 ### Networking
 
-**VPC Architecture**: Created a VPC with public and private subnets across two availability zones for high availability
+**VPC Architecture**: VPC with public and private subnets across two availability zones for high availability
 
-**Public Subnets**: Host the ALB to receive traffic from the internet
+**Public Subnets**: Assigned public IP address on ALB to receive traffic from the internet
 
-**Private Subnets**: Host the ECS tasks for security, preventing direct internet access
+**Private Subnets**: Assigned rivate IP address on ECS tasks for security, preventing direct internet access
 
 **NAT Gateway**: Allows containers in private subnets to access the internet for updates and dependencies
 
