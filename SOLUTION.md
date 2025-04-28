@@ -1,9 +1,6 @@
 # Solution Insights
 
-
 ## Networking, Security, IAM, and Resource Dependencies
-
-<br>
 
 ### Networking
 
@@ -17,8 +14,6 @@
 
 **Internet Gateway**: Enables inbound/outbound internet access for the public subnets
 
-<br>
-
 ### Security
 
 **Security Groups**:
@@ -29,23 +24,19 @@ ECS tasks security group only allows traffic from the ALB on the container port
 
 IAM Principle of Least Privilege: Applied through specific roles for ECS tasks
 
-<br>
-
-### IAM 
+### IAM
 
 Task Execution Role: Allows ECS to pull container images and push logs
 
 Task Role: Defines permissions for the running container (currently minimal with commented example for S3 access)
 
-<br>
-
-### Resource Dependencies 
+### Resource Dependencies0
 
 Used implicit and explicit dependencies (depends_on) to ensure proper resource creation order
 
 Used lifecycle configurations to handle updates gracefully (e.g., ignoring desired count changes during deployments)
 
-**Public Exposure**
+### Public Exposure
 
 The service is exposed publicly through an Application Load Balancer (ALB)
 
@@ -55,11 +46,7 @@ Security is maintained by placing containers in private subnets
 
 Container access is restricted to only ALB traffic through security group rules
 
-<br><br>
-
 ## Reusability, Scalability, and Maintainability
-
-<br>
 
 ### Reusability
 
@@ -69,17 +56,13 @@ Container access is restricted to only ALB traffic through security group rules
 
 **Modular Approach**: Logically organized resources by function
 
-<br>
-
 ### Scalability
 
 **Auto Scaling**: Implemented step scaling policy based on CPU utilization (scale up at 60%, down at 30%)
 
 **Multi-AZ**: Resources deployed across multiple availability zones
 
-**Fargate**: Serverless container execution eliminates host management concerns
-
-<br>
+**FarGate**: Serverless container execution eliminates host management concerns
 
 ### Maintainability
 
@@ -91,18 +74,15 @@ Container access is restricted to only ALB traffic through security group rules
 
 **Outputs**: Provided essential outputs for easy reference
 
-<br>
-
 ### Tradeoffs and Considerations
 
 **Cost vs. Reliability**:
 
 - Using two AZs balances cost with reliability
 
-- NAT Gateway adds cost but enables secure outbound connectivity
+- NAT Gateway adds cost but enables secure outbound connectivity. Used only in one AZ for cost effectiveness and simplicity, but single point of failure and cross zone traffic charges may appear.
 
-- Fargate is more expensive than EC2 but reduces operational overhead
-
+- FarGate is more expensive than EC2 but reduces operational overhead
 
 **Security vs. Simplicity**:
 
@@ -112,14 +92,11 @@ Container access is restricted to only ALB traffic through security group rules
 
 - No HTTPS configured for simplicity (would recommend in production)
 
-
 **Scalability Settings**:
 
 - Step scaling allows for more aggressive scaling at higher utilization
 
 - Scaling down is more conservative (longer cooldown) to prevent thrashing
-
-<br>
 
 ### Improvements for Production
 
@@ -129,7 +106,6 @@ Container access is restricted to only ALB traffic through security group rules
 
 - Implement HTTP to HTTPS redirection
 
-
 **Enhanced Monitoring**:
 
 - Add CloudWatch dashboards
@@ -138,17 +114,14 @@ Container access is restricted to only ALB traffic through security group rules
 
 - Implement X-Ray tracing
 
-
 **CI/CD Integration**:
 
 - Add pipeline configuration for automated deployments
 
 - Implement blue/green deployment strategy
 
-
 **Network Optimization**:
 
 - Add CloudFront distribution for global edge caching
 
 - Implement WAF for security
-
