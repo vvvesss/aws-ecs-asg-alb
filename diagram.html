@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 600">
+  <!-- Styles -->
+  <defs>
+    <style>
+      .title {
+        font-family: Arial, sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+        text-anchor: middle;
+      }
+      .subtitle {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        text-anchor: middle;
+      }
+      .label {
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        text-anchor: middle;
+      }
+      .arrow {
+        stroke: #666;
+        stroke-width: 2;
+        fill: none;
+        marker-end: url(#arrowhead);
+      }
+      .arrow-dashed {
+        stroke: #666;
+        stroke-width: 2;
+        stroke-dasharray: 5,5;
+        fill: none;
+        marker-end: url(#arrowhead);
+      }
+      .aws-orange {
+        fill: #FF9900;
+      }
+      .vpc-border {
+        fill: #E8E8E8;
+        stroke: #999999;
+        stroke-width: 2;
+      }
+      .subnet-public {
+        fill: #B9DCFF;
+        stroke: #1A73E8;
+        stroke-width: 1;
+      }
+      .subnet-private {
+        fill: #C7E9C0;
+        stroke: #34A853;
+        stroke-width: 1;
+      }
+      .resource {
+        fill: white;
+        stroke: #666;
+        stroke-width: 1;
+      }
+      .resource-label {
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        text-anchor: middle;
+      }
+      .internet {
+        fill: #f0f0f0;
+        stroke: #666;
+        stroke-width: 1;
+      }
+      .routetable {
+        fill: #fffacd;
+        stroke: #daa520;
+        stroke-width: 1;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="white" />
+
+  <!-- Title -->
+  <text x="400" y="30" class="title">AWS Network Architecture</text>
+  <text x="400" y="55" class="subtitle">ECS with ALB in Public/Private Subnet Design</text>
+
+  <!-- AWS Cloud Border -->
+  <rect x="50" y="80" width="700" height="480" rx="10" ry="10" fill="#f8f8f8" stroke="#888" stroke-width="1" stroke-dasharray="5,5" />
+  <text x="110" y="100" class="label">AWS Cloud</text>
+
+  <!-- VPC -->
+  <rect x="70" y="120" width="660" height="420" rx="5" ry="5" class="vpc-border" />
+  <text x="120" y="140" class="label">VPC (10.0.0.0/16)</text>
+
+  <!-- Public Subnet 1 -->
+  <rect x="90" y="160" width="300" height="160" rx="5" ry="5" class="subnet-public" />
+  <text x="240" y="180" class="label">Public Subnet (10.0.0.0/24)</text>
+  <text x="240" y="195" class="label">Availability Zone A</text>
+
+  <!-- Public Subnet 2 -->
+  <rect x="410" y="160" width="300" height="160" rx="5" ry="5" class="subnet-public" />
+  <text x="560" y="180" class="label">Public Subnet (10.0.1.0/24)</text>
+  <text x="560" y="195" class="label">Availability Zone B</text>
+
+  <!-- Private Subnet 1 -->
+  <rect x="90" y="340" width="300" height="180" rx="5" ry="5" class="subnet-private" />
+  <text x="240" y="360" class="label">Private Subnet (10.0.2.0/24)</text>
+  <text x="240" y="375" class="label">Availability Zone A</text>
+
+  <!-- Private Subnet 2 -->
+  <rect x="410" y="340" width="300" height="180" rx="5" ry="5" class="subnet-private" />
+  <text x="560" y="360" class="label">Private Subnet (10.0.3.0/24)</text>
+  <text x="560" y="375" class="label">Availability Zone B</text>
+
+  <!-- Internet -->
+  <ellipse cx="400" cy="70" rx="60" ry="20" class="internet" />
+  <text x="400" y="75" class="label">Internet</text>
+
+  <!-- Internet Gateway -->
+  <rect x="380" y="110" width="40" height="40" class="resource" />
+  <text x="400" y="130" class="resource-label">IGW</text>
+
+  <!-- NAT Gateway -->
+  <rect x="170" y="220" width="50" height="40" class="resource" />
+  <text x="195" y="243" class="resource-label">NAT GW</text>
+
+  <!-- ALB in Public Subnet 1 -->
+  <rect x="250" y="220" width="50" height="40" class="resource" />
+  <text x="275" y="243" class="resource-label">ALB</text>
+
+  <!-- ALB in Public Subnet 2 -->
+  <rect x="490" y="220" width="50" height="40" class="resource" />
+  <text x="515" y="243" class="resource-label">ALB</text>
+
+  <!-- ECS Task in Private Subnet 1 -->
+  <rect x="170" y="400" width="60" height="40" class="resource" />
+  <text x="200" y="423" class="resource-label">ECS Task</text>
+
+  <!-- ECS Task in Private Subnet 2 -->
+  <rect x="490" y="400" width="60" height="40" class="resource" />
+  <text x="520" y="423" class="resource-label">ECS Task</text>
+
+  <!-- Route Tables -->
+  <rect x="120" y="280" width="60" height="30" class="routetable" />
+  <text x="150" y="298" class="resource-label">Public RT</text>
+
+  <rect x="120" y="480" width="60" height="30" class="routetable" />
+  <text x="150" y="498" class="resource-label">Private RT</text>
+
+  <!-- Connections -->
+  <!-- Internet to IGW -->
+  <path d="M 400,90 L 400,110" class="arrow" />
+  
+  <!-- IGW to Public Subnets -->
+  <path d="M 380,130 L 350,130 L 350,170" class="arrow" />
+  <path d="M 420,130 L 450,130 L 450,170" class="arrow" />
+  
+  <!-- NAT to Internet (through IGW) -->
+  <path d="M 195,220 L 195,140 C 195,120 380,120 380,129" class="arrow" />
+  
+  <!-- Public Route Table Associations -->
+  <path d="M 180,280 L 270,280 L 270,260" class="arrow-dashed" />
+  <path d="M 180,280 C 240,280 450,280 500,260" class="arrow-dashed" />
+  
+  <!-- Private Route Table Associations -->
+  <path d="M 180,480 L 240,480 L 240,440" class="arrow-dashed" />
+  <path d="M 180,480 C 240,480 450,480 500,440" class="arrow-dashed" />
+  
+  <!-- ALB to ECS Tasks -->
+  <path d="M 275,260 L 275,300 C 275,350 200,350 200,400" class="arrow" />
+  <path d="M 515,260 L 515,300 C 515,350 520,350 520,400" class="arrow" />
+  
+  <!-- ECS Tasks to NAT (outbound traffic) -->
+  <path d="M 200,400 L 200,380 C 200,350 170,300 170,240" class="arrow-dashed" />
+  <path d="M 520,400 L 520,380 C 520,300 520,240 220,240" class="arrow-dashed" />
+  
+  <!-- Internet to ALB (incoming requests) -->
+  <path d="M 400,90 L 420,110 C 440,140 440,200 490,220" class="arrow" />
+  <path d="M 400,90 L 380,110 C 360,140 360,200 300,220" class="arrow" />
+
+  <!-- Legend -->
+  <rect x="610" y="480" width="100" height="110" fill="white" stroke="#666" stroke-width="1" />
+  <text x="660" y="495" class="resource-label">Legend</text>
+  
+  <rect x="620" y="505" width="15" height="15" class="subnet-public" />
+  <text x="665" y="515" class="resource-label" text-anchor="start">Public Subnet</text>
+  
+  <rect x="620" y="525" width="15" height="15" class="subnet-private" />
+  <text x="665" y="535" class="resource-label" text-anchor="start">Private Subnet</text>
+  
+  <rect x="620" y="545" width="15" height="15" class="resource" />
+  <text x="665" y="555" class="resource-label" text-anchor="start">AWS Resource</text>
+  
+  <rect x="620" y="565" width="15" height="15" class="routetable" />
+  <text x="665" y="575" class="resource-label" text-anchor="start">Route Table</text>
+</svg>
